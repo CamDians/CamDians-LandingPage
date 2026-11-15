@@ -1,0 +1,37 @@
+/* ============================================================
+   CamDiansRX — Khmer typography (unchanged from the existing site)
+   KhmerOS Siemreap for headings, Battambang for body text.
+   unicode-range keeps these files from ever loading for a reader
+   who is not looking at the Khmer version.
+   ============================================================ */
+@font-face{
+  font-family:'CamKhmerHead';
+  src:url('../fonts/khmer-head.woff2') format('woff2');
+  font-weight:400 800;font-style:normal;font-display:swap;
+  unicode-range:U+1780-17FF,U+19E0-19FF,U+200B;
+}
+@font-face{
+  font-family:'CamKhmerBody';
+  src:url('../fonts/khmer-body.woff2') format('woff2');
+  font-weight:400 800;font-style:normal;font-display:swap;
+  unicode-range:U+1780-17FF,U+19E0-19FF,U+200B;
+}
+
+/* Latin first, then Korean, then Khmer — each glyph falls through
+   to the first family that actually has it. */
+body{font-family:'Inter','Pretendard Variable',Pretendard,'CamKhmerBody',
+     -apple-system,BlinkMacSystemFont,sans-serif;}
+h1,h2,h3,.card__title,.plan__amt,.proof__n,.brand{
+  font-family:'Inter','Pretendard Variable',Pretendard,'CamKhmerHead',
+     -apple-system,BlinkMacSystemFont,sans-serif;}
+
+/* Khmer runs long and has no spaces at every word, so it needs more room */
+html[lang="km"] .hero__title{letter-spacing:0;line-height:1.32;max-width:26ch;
+  font-size:clamp(28px, 4.2vw, 44px);}
+html[lang="km"] h2{letter-spacing:0;line-height:1.45;}
+html[lang="km"] .card__title,
+html[lang="km"] .plan__meta,
+html[lang="km"] .diff h3{letter-spacing:0;line-height:1.6;}
+html[lang="km"] .vs__cell,
+html[lang="km"] .vs__label,
+html[lang="km"] .vs__head span{line-height:1.6;}
