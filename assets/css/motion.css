@@ -1,0 +1,42 @@
+/* ============================================================
+   CamDiansRX — motion
+   Five movements, none longer than 0.6s.
+   The page is fully readable with every one of them switched off:
+   nothing here hides content, it only delays how it arrives.
+   ============================================================ */
+
+/* 1 — scroll reveal. Starts visible; the script adds .reveal only when
+       it can also take it away again, so no-JS readers lose nothing. */
+.js .reveal{opacity:0;transform:translateY(var(--sp-4));}
+.js .reveal.is-in{
+  opacity:1;transform:none;
+  transition:opacity var(--dur-3) var(--ease), transform var(--dur-3) var(--ease);
+}
+
+/* 2 — button lift on hover: declared with the button, see components.css */
+
+/* 3 — card lift on hover: declared with the card, see components.css */
+
+/* 4 — counting numbers. The final value is in the HTML, so a reader
+       with motion off still sees the real figure. */
+.count{font-variant-numeric:tabular-nums;}
+
+/* 5 — the live dot in the eyebrow */
+.pulse{
+  display:inline-block;width:var(--sp-2);height:var(--sp-2);border-radius:var(--r-pill);
+  background:var(--accent);margin-right:var(--sp-2);vertical-align:middle;
+  animation:pulse 2.4s var(--ease) infinite;
+}
+@keyframes pulse{
+  0%,70%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.45);}
+  35%{box-shadow:0 0 0 6px rgba(37,99,235,0);}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .js .reveal,
+  .js .reveal.is-in{opacity:1;transform:none;transition:none;}
+  .pulse{animation:none;}
+  .btn,.card,.field__input{transition:none;}
+  .btn--primary:hover,.btn--ghost:hover,.card--lift:hover{transform:none;}
+}
