@@ -1,0 +1,136 @@
+/* ============================================================
+   CamDiansRX — design tokens
+   Every component in this site is built from these values only.
+   Colours and fonts are carried over unchanged from the existing site.
+   ============================================================ */
+
+:root{
+
+  /* ---------- colour ----------
+     Three Pantone colours carry the whole site:
+
+       PANTONE 553 C          #284734   deep green   — text, buttons, links
+       PANTONE 11-4202 TCX    #EFEFE8   Star White   — page and card surface
+       PANTONE 210 C          #F99FC9   pink         — emphasis, never text
+
+     210 C is 1.68:1 on Star White, far under the 4.5:1 that small text
+     needs, so it is never a text colour on a light surface. It is painted
+     instead: the highlighter behind the headline, the bars on the market
+     page, the drag bar, the pills — and it becomes text only on the dark
+     green panel, where it reaches 7.90:1.
+
+     Everything else below is a tint or a shade of those three. Each value
+     that carries text was measured; the ratio is written beside it.        */
+
+  --accent:#284734;        /* 553 C — 8.91:1 on --bg                        */
+  --accent-dark:#1c3325;   /* hover / pressed — 11.73:1 against --bg text   */
+  --accent-darker:#142419;
+  --accent-light:#fbd9e8;  /* 210 C tint — pill fills, light text on --dark */
+  --accent-pale:#e3e3d8;   /* Star White shade — the alternating section    */
+  --accent-soft:#f99fc9;   /* 210 C — paint and strokes, text only on dark  */
+  --ink:#284734;           /* 8.91:1 on --bg, 7.96:1 on --accent-pale       */
+  --ink-soft:#445b4d;      /* 6.38:1 on --bg, 5.70:1 on --accent-pale       */
+  --muted:#a8a89a;         /* decoration only — fails as text, by design    */
+  --line:#d5d5c8;
+  --line-soft:#dcdccf;      /* bar tracks: must read on --bg and --accent-pale  */
+  --bg:#efefe8;            /* 11-4202 TCX Star White — the page             */
+  --surface:#f7f7f2;       /* a Star White tint, so a card lifts off the page
+                              the way it used to when the page was white    */
+  --dark:#17291d;          /* the one dark panel — 13.26:1 against --bg     */
+  --red:#dc2626;           /* kept: it means "this field is wrong"          */
+
+  /* Small text uses this rather than --muted. */
+  --text-muted:#51655a;    /* 5.41:1 on --bg, 4.84:1 on --accent-pale       */
+
+  /* The CamDians wordmark keeps its own colours and does not follow the
+     palette. Nothing else may use these two. */
+  --logo-1:#2563eb;
+  --logo-2:#1e3a8a;
+
+  /* channel values, for the few places that need colour at low opacity */
+  --accent-rgb:40,71,52;
+  --soft-rgb:249,159,201;
+  --dark-rgb:23,41,29;
+
+  /* ---------- type: 6 steps ---------- */
+  /* ---------- the golden ratio, written once ---------- */
+  --phi:1.618;
+  --phi-inv:0.618;
+
+  /* ---------- type: 6 steps, built on phi ----------
+     A step is the square root of phi (1.272), so any two steps apart
+     is exactly 1 : 1.618 —
+        label 12.6 : lead 20.4      = 1 : 1.618
+        body  16.0 : card  25.9     = 1 : 1.618
+        lead  20.4 : section 33.0   = 1 : 1.618
+     and the page headline sits a full phi above the section headline
+        section 33.0 : headline 53.4 = 1 : 1.618
+     A pure phi between every adjacent step would put the body at 20px
+     and the headline at 138px, which no page can carry, so phi lives
+     at the interval that is actually read.                            */
+  --fs-1:clamp(33px, 4.4vw, 53.4px);  /* page headline            */
+  --fs-2:clamp(25.9px, 2.8vw, 33px);  /* section headline         */
+  --fs-3:25.9px;                       /* card headline            */
+  --fs-4:20.4px;                       /* lead paragraph           */
+  --fs-5:16px;                         /* body                     */
+  --fs-6:12.6px;                       /* label, caption, eyebrow  */
+
+  /* line height is taken from phi as well */
+  --lh-tight:1.236;                    /* = 2 / phi    — display     */
+  --lh-snug:1.382;                     /* = 2 - 1/phi  — headings    */
+  --lh-body:1.618;                     /* = phi        — body text   */
+
+  --fw-regular:500;
+  --fw-bold:700;
+  --fw-black:800;
+
+  --tracking-tight:-1.4px;
+  --tracking-snug:-.4px;
+  --tracking-wide:2.2px;
+
+  /* ---------- spacing: 8 steps, each one phi times the last ----------
+     4 · 6.5 · 10.5 · 17 · 27 · 44 · 71 · 115 — Fibonacci to the eye,
+     phi to the arithmetic.                                            */
+  --sp-1:4px;
+  --sp-2:6.5px;
+  --sp-3:10.5px;
+  --sp-4:17px;
+  --sp-5:27px;
+  --sp-6:44px;
+  --sp-7:71px;
+  --sp-8:115px;
+
+  /* ---------- corners: Fibonacci, so each is ~phi of the last ------- */
+  --r-1:8px;     /* input, chip      */
+  --r-2:13px;    /* small card, logo */
+  --r-3:21px;    /* card             */
+  --r-4:34px;    /* panel            */
+  --r-pill:100px;
+
+  /* ---------- shadow ---------- */
+  --sh-1:0 1px 2px rgba(var(--accent-rgb),.08);
+  --sh-2:0 4px 16px rgba(var(--accent-rgb),.09);
+  --sh-3:0 12px 30px rgba(var(--accent-rgb),.14);
+  --sh-accent:0 10px 26px rgba(var(--accent-rgb),.26);
+  --ring:0 0 0 3px rgba(var(--accent-rgb),.32);
+
+  /* ---------- motion (every value is at or under 0.6s) ---------- */
+  --dur-1:.16s;
+  --dur-2:.28s;
+  --dur-3:.55s;
+  --ease:cubic-bezier(.2,.7,.3,1);
+
+  /* ---------- layout ----------
+     --measure is the page divided by phi: the width a line of text is
+     allowed to reach before it gets hard to track back to.            */
+  --page:1160px;
+  --measure:717px;              /* 1160 / 1.618 */
+  --gutter:var(--sp-5);
+  --topbar-h:68px;
+  --golden:1.618;               /* for aspect-ratio                    */
+  --golden-tall:0.618;          /* the same rectangle stood on its end  */
+}
+
+@media (max-width:760px){
+  :root{ --gutter:var(--sp-4); --topbar-h:60px; }
+}

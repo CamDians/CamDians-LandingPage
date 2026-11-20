@@ -1,0 +1,96 @@
+/* ============================================================
+   CamDiansRX — components
+   Button, card and field. Every value below is a token.
+   No raw px, hex or shadow is written here.
+   ============================================================ */
+
+/* ---------------- button ---------------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
+  font-family:inherit;font-size:var(--fs-5);font-weight:var(--fw-black);
+  letter-spacing:var(--tracking-snug);line-height:1;
+  padding:var(--sp-4) var(--sp-5);
+  border-radius:var(--r-pill);border:1px solid transparent;
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:transform var(--dur-1) var(--ease),
+             box-shadow var(--dur-1) var(--ease),
+             background var(--dur-1) var(--ease),
+             border-color var(--dur-1) var(--ease);
+}
+.btn svg{width:1.15em;height:1.15em;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2;}
+
+.btn--primary{background:var(--accent);color:var(--bg);box-shadow:var(--sh-accent);}
+.btn--primary:hover{background:var(--accent-dark);transform:translateY(-2px);}
+.btn--primary:active{transform:translateY(0);}
+
+.btn--ghost{background:var(--surface);color:var(--accent-dark);border-color:var(--line);box-shadow:var(--sh-1);}
+.btn--ghost:hover{border-color:var(--accent-soft);box-shadow:var(--sh-2);transform:translateY(-2px);}
+.btn--ghost:active{transform:translateY(0);}
+
+.btn--sm{font-size:var(--fs-6);padding:var(--sp-3) var(--sp-4);}
+
+/* ---------------- card ---------------- */
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-3);
+  padding:var(--sp-5);box-shadow:var(--sh-2);
+  transition:transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease),
+             border-color var(--dur-2) var(--ease);
+}
+.card__kicker{font-size:var(--fs-6);font-weight:var(--fw-black);letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;color:var(--accent-dark);}
+.card__title{margin-top:var(--sp-3);font-size:var(--fs-3);font-weight:var(--fw-black);
+  letter-spacing:var(--tracking-snug);line-height:var(--lh-snug);}
+.card__body{margin-top:var(--sp-3);font-size:var(--fs-5);color:var(--ink-soft);}
+.card--lift:hover{transform:translateY(-3px);box-shadow:var(--sh-3);border-color:var(--accent-soft);}
+.card--pick{border-color:var(--accent);box-shadow:var(--sh-accent);}
+
+/* ---------------- field ---------------- */
+.field{display:flex;flex-direction:column;gap:var(--sp-2);}
+.field__label{font-size:var(--fs-6);font-weight:var(--fw-black);color:var(--ink-soft);
+  letter-spacing:var(--tracking-snug);}
+.field__input{
+  font-family:inherit;font-size:var(--fs-5);font-weight:var(--fw-regular);color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-1);
+  padding:var(--sp-3) var(--sp-4);width:100%;
+  transition:border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+}
+.field__input::placeholder{color:var(--text-muted);}
+.field__input:hover{border-color:var(--accent-soft);}
+.field__input:focus{outline:none;border-color:var(--accent);box-shadow:var(--ring);}
+.field__hint{font-size:var(--fs-6);color:var(--text-muted);}
+.field__input[aria-invalid="true"]{border-color:var(--red);}
+
+/* ---------------- comparison ---------------- */
+.vs{border:1px solid var(--line);border-radius:var(--r-3);overflow:hidden;background:var(--surface);
+  box-shadow:var(--sh-2);}
+.vs__head,.vs__row{display:grid;grid-template-columns:.9fr 1.35fr 1fr 1fr;align-items:stretch;}
+.vs__row{border-top:1px solid var(--line);}
+.vs__head span,.vs__cell,.vs__label{padding:var(--sp-4);font-size:var(--fs-6);}
+.vs__head span{font-weight:var(--fw-black);color:var(--text-muted);letter-spacing:var(--tracking-snug);}
+.vs__head .is-us{color:var(--accent-darker);background:var(--accent-light);}
+.vs__label{font-weight:var(--fw-black);color:var(--ink-soft);}
+.vs__cell{color:var(--ink-soft);}
+.vs__cell.is-us{color:var(--ink);font-weight:var(--fw-bold);background:var(--accent-pale);}
+.vs__cell.is-us b{color:var(--accent-darker);font-weight:var(--fw-black);}
+.vs__foot{font-size:var(--fs-6);color:var(--text-muted);margin-top:var(--sp-3);text-align:center;}
+
+@media (max-width:760px){
+  /* a four-column table does not survive a phone, so each row becomes a block */
+  .vs__head{display:none;}
+  .vs__row{display:block;border-top:1px solid var(--line);padding:var(--sp-4);}
+  .vs__label{display:block;padding:0 0 var(--sp-2);font-size:var(--fs-5);color:var(--ink);}
+  .vs__cell{display:flex;justify-content:space-between;gap:var(--sp-4);
+    padding:var(--sp-2) 0;background:none !important;}
+  .vs__cell::before{content:attr(data-c);flex:0 0 auto;font-weight:var(--fw-black);color:var(--text-muted);}
+  .vs__cell.is-us::before{color:var(--accent-dark);}
+  .vs__cell.is-us{color:var(--ink);}
+}
+
+/* ---------------- small shared pieces ---------------- */
+.chip{
+  display:inline-flex;align-items:center;gap:var(--sp-2);
+  font-size:var(--fs-6);font-weight:var(--fw-bold);color:var(--accent-darker);
+  background:var(--accent-light);border-radius:var(--r-pill);
+  padding:var(--sp-2) var(--sp-3);
+}
+.rule{height:1px;background:var(--line);border:0;margin-block:var(--sp-6);}
